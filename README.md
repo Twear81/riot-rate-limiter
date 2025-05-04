@@ -1,23 +1,23 @@
 # Riot Rate Limiter
 
-[![Version](https://img.shields.io/npm/v/@fightmegg/riot-rate-limiter.svg)](https://www.npmjs.com/package/@fightmegg/riot-rate-limiter)
-[![Downloads](https://img.shields.io/npm/dm/@fightmegg/riot-rate-limiter.svg)](https://www.npmjs.com/package/@fightmegg/riot-rate-limiter)
-[![CircleCI](https://circleci.com/gh/fightmegg/riot-rate-limiter/tree/master.svg?style=svg)](https://circleci.com/gh/fightmegg/riot-rate-limiter/tree/master)
+[![Version](https://img.shields.io/npm/v/@ballaual/riot-rate-limiter.svg)](https://www.npmjs.com/package/@Ballaual/riot-rate-limiter)
+[![Downloads](https://img.shields.io/npm/dm/@ballaual/riot-rate-limiter.svg)](https://www.npmjs.com/package/@Ballaual/riot-rate-limiter)
 
 > Node.JS Rate Limiter for [Riot Games API](https://developer.riotgames.com)
+> Updated version - fully working 04/2025
 
-**[Wiki](https://github.com/fightmegg/riot-rate-limiter/wiki)**
+**[Wiki](https://github.com/Ballaual/riot-rate-limiter/wiki)**
 
 ### Features
 
 - 100% Endpoint coverage
 - **Spread** based rate-limiter
-- [Request synchronization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Synchronization)
-- [Request prioritization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Priorities)
-- [429 response](https://github.com/fightmegg/riot-rate-limiter/wiki/429-Reponses) retrying
-- [Concurrent requests](https://github.com/fightmegg/riot-rate-limiter/wiki/Concurrency)
-- [429 Retry limit](https://github.com/fightmegg/riot-rate-limiter/wiki/Max-Retries)
-- [Multi-instance / Cluster](<https://github.com/fightmegg/riot-rate-limiter/wiki/Multi-Instance---Cluster-(Redis)>) support
+- [Request synchronization](https://github.com/Ballaual/riot-rate-limiter/wiki/Request-Synchronization)
+- [Request prioritization](https://github.com/Ballaual/riot-rate-limiter/wiki/Request-Priorities)
+- [429 response](https://github.com/Ballaual/riot-rate-limiter/wiki/429-Reponses) retrying
+- [Concurrent requests](https://github.com/Ballaual/riot-rate-limiter/wiki/Concurrency)
+- [429 Retry limit](https://github.com/Ballaual/riot-rate-limiter/wiki/Max-Retries)
+- [Multi-instance / Cluster](<https://github.com/Ballaual/riot-rate-limiter/wiki/Multi-Instance---Cluster-(Redis)>) support
 - Built specifically for [Riot Games Rate Limiting](https://web.archive.org/web/20190629194440/https://developer.riotgames.com/rate-limiting.html)
 
 ## Contents
@@ -42,13 +42,13 @@
 ## Installation
 
 ```shell
-$ npm install @fightmegg/riot-rate-limiter
+$ npm install @Ballaual/riot-rate-limiter
 ```
 
 ## Usage
 
 ```ts
-import { RiotRateLimiter } from "@fightmegg/riot-rate-limiter";
+import { RiotRateLimiter } from "@Ballaual/riot-rate-limiter";
 
 const limiter = new RiotRateLimiter();
 
@@ -128,7 +128,7 @@ We also provided some helper functions & objects.
 This can extract the region or platformId from your URL:
 
 ```ts
-import { extractRegion } from "@fightmegg/riot-rate-limiter";
+import { extractRegion } from "@Ballaual/riot-rate-limiter";
 
 extractRegion("https://na1.api.riotgames.com/method"); // returns na1
 ```
@@ -138,7 +138,7 @@ extractRegion("https://na1.api.riotgames.com/method"); // returns na1
 This can extract the method from your URL:
 
 ```ts
-import { extractMethod } from "@fightmegg/riot-rate-limiter";
+import { extractMethod } from "@Ballaual/riot-rate-limiter";
 
 extractMethod(
   "https://na1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/12345"
@@ -147,11 +147,11 @@ extractMethod(
 
 #### METHODS & HOST
 
-For those looking to build a `RiotGamesAPI` library ontop of this rate limiter, we export two object called [METHODS & HOST](https://github.com/fightmegg/riot-rate-limiter/blob/master/%40types/index.ts#L58). You can use these exports to create the URLs for you, as seen below:
+For those looking to build a `RiotGamesAPI` library ontop of this rate limiter, we export two object called [METHODS & HOST](https://github.com/Ballaual/riot-rate-limiter/blob/master/%40types/index.ts#L58). You can use these exports to create the URLs for you, as seen below:
 
 ```ts
 import { compile } from "path-to-regexp";
-import { HOST, METHODS } from "@fightmegg/riot-rate-limiter";
+import { HOST, METHODS } from "@Ballaual/riot-rate-limiter";
 
 const createHost = compile(HOST, { encode: encodeURIComponent });
 const createPath = compile(METHODS.ACCOUNT.GET_BY_PUUID, {
@@ -179,4 +179,4 @@ E2E tests: `npm run test:e2e`
 
 ## Maintainers
 
-[@olliejennings](https://github.com/olliejennings)
+[@Ballaual](https://github.com/Ballaual)
