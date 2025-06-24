@@ -310,7 +310,7 @@ export const METHODS = {
     GET_BY_SUMMONER_ID: "/lol/summoner/v4/summoners/:encryptedSummonerId",
   },
   TFT_LEAGUE_V1: {
-    GET_ENTRIES_BY_PUUID: "/tft/league/v1/entries/by-puuid/:puuid",
+    GET_ENTRIES_BY_PUUID: "/tft/league/v1/by-puuid/:puuid",
     GET_CHALLENGER: "/tft/league/v1/challenger",
     GET_ENTRIES_BY_SUMMONER: "/tft/league/v1/entries/by-summoner/:summonerId",
     GET_ALL_ENTRIES: "/tft/league/v1/entries/:tier/:division",
