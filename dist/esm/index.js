@@ -100,10 +100,18 @@ export class RiotRateLimiter {
                     return reject(resp);
                 const limiter = this.rateLimiters?.[region]?.[method];
                 if (limiter) {
-                    this.updateRateLimiters(region, method, rateLimits);
+                    try {
+                        this.updateRateLimiters(region, method, rateLimits);
+                    } catch (err) {
+                        // headers rate-limit malformés : on swallo et on rejette normalement
+                    }
                     return reject({ status, statusText, ...rateLimits });
                 }
-                this.setupRateLimiters(region, method, rateLimits);
+                try {
+                    this.setupRateLimiters(region, method, rateLimits);
+                } catch (err) {
+                    // headers rate-limit malformés : on swallo et on retente après backoff
+                }
                 setTimeout(() => {
                     resolve(this.rateLimiters[region][method].main.schedule(jobOptions, () => this.executeRequest({
                         req,
