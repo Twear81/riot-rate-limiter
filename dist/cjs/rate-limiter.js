@@ -33,9 +33,15 @@ const createRateLimitRetry = (limitType, retryAfterDefault, retryLimit) => (err,
 exports.createRateLimitRetry = createRateLimitRetry;
 const updateRateLimiters = (rateLimiters, rateLimits) => {
     const { limits, counts } = rateLimits;
+    if (!limits || !counts)
+        return rateLimiters;
     const limitsArr = limits.split(",");
     const countsArr = counts.split(",");
+    if (limitsArr.length !== countsArr.length)
+        return rateLimiters;
     return rateLimiters.map((limiter, index) => {
+        if (!limitsArr[index] || !limitsArr[index].includes(":"))
+            return limiter;
         limiter.updateSettings((0, utils_1.createRateLimiterOptions)(limitsArr[index], countsArr[index]));
         return limiter;
     });
@@ -43,12 +49,18 @@ const updateRateLimiters = (rateLimiters, rateLimits) => {
 exports.updateRateLimiters = updateRateLimiters;
 const synchronizeRateLimiters = async (rateLimiters, rateLimits, methodCounts) => {
     const { limits, counts } = rateLimits;
+    if (!limits || !counts)
+        return rateLimiters;
     const limitsArr = limits.split(",");
     const countsArr = counts.split(",");
+    if (limitsArr.length !== countsArr.length)
+        return rateLimiters;
     const requestsInFlight = methodCounts.EXECUTING;
     return Promise.all(rateLimiters.map(async (limiter, index) => {
         const currentReservoir = await limiter.currentReservoir();
         if (!currentReservoir)
+            return limiter;
+        if (!limitsArr[index] || !limitsArr[index].includes(":"))
             return limiter;
         const newRateLimits = (0, utils_1.createRateLimiterOptions)(limitsArr[index], countsArr[index]);
         const rateLimitsLeftFromRiot = newRateLimits.reservoir || 0;
